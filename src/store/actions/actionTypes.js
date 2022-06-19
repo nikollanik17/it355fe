@@ -1,0 +1,13 @@
+export const SET_USER = "SET_USER";
+export const SET_LOGIN_ERR = "SET_LOGIN_ERR";
+export const SET_REGISTER_ERR = "SET_REGISTER_ERR";
+
+export const START_LOADING = "START_LOADING";
+export const FINISH_LOADING = "FINISH_LOADING";
+
+export const SUCCESS_NOTIFICATION = "SUCCESS_NOTIFICATION";
+export const ERROR_NOTIFICATION = "ERROR_NOTIFICATION";
+
+export const SET_BOARDS = "SET_BOARDS";
+export const SET_TASKS = "SET_TASKS";
+export const SET_SINGLE_BOARD = "SET_SINGLE_BOARD";

@@ -1,0 +1,77 @@
+{
+  "name": "trustbucket-admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
+    "@ckeditor/ckeditor5-build-classic": "^27.1.0",
+    "@ckeditor/ckeditor5-react": "^3.0.2",
+    "@craco/craco": "^6.3.0",
+    "@tailwindcss/forms": "^0.4.0",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "autoprefixer": "^9.8.8",
+    "axios": "^0.25.0",
+    "chart.js": "^3.5.0",
+    "chartjs-adapter-moment": "^1.0.0",
+    "clsx": "^1.1.1",
+    "dayjs": "^1.10.7",
+    "draft-js": "^0.11.7",
+    "draft-js-custom-styles": "^2.1.1",
+    "draft-js-export-html": "^1.4.1",
+    "draft-js-import-html": "^1.4.1",
+    "draftjs-to-html": "^0.9.1",
+    "formik": "^2.2.9",
+    "html-react-parser": "^1.4.8",
+    "html-to-draftjs": "^1.5.0",
+    "leaflet": "^1.7.1",
+    "moment": "^2.29.1",
+    "postcss": "^8.3.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-draft-wysiwyg": "^1.14.7",
+    "react-flatpickr": "^3.10.7",
+    "react-google-maps": "^9.4.5",
+    "react-leaflet": "^3.2.5",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "react-stars-display": "^0.1.24",
+    "react-toastify": "^8.1.0",
+    "react-transition-group": "^4.4.1",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "sass": "^1.43.2",
+    "swiper": "6.8.4",
+    "underscore": "^1.13.2",
+    "web-vitals": "^1.1.1",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.0.2"
+  }
+}
