@@ -49,7 +49,7 @@ const AddTaskModal = ({ businessModalOpen, setBusinessModalOpen, boardId, editCa
 			id="add-task-modal"
 			modalOpen={businessModalOpen}
 			setModalOpen={setBusinessModalOpen}
-			title={edit ? "Task details" : "Add new task"}
+			title={edit ? "Task details" : `Add new "${initialValues.status}" task`}
 		>
 			<form noValidate onSubmit={formik.handleSubmit}>
 				<div>
@@ -58,7 +58,7 @@ const AddTaskModal = ({ businessModalOpen, setBusinessModalOpen, boardId, editCa
 						{/* Business Profile */}
 						<section>
 							<div className="text-sm mb-4">
-								Add new task to your board
+								{edit ? "Update your task" : "Add new task to your board"}
 							</div>
 							<div className="mb-3">
 								<div className="">

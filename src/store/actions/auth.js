@@ -39,11 +39,7 @@ export const login = (user) => {
 				dispatch(finishLoading());
 			})
 			.catch((error) => {
-				if (error.response?.status === '401') {
-					dispatch(errorsNotification("Inncorect password"));
-				} else {
-					dispatch(errorsNotification("User not found"));
-				}
+				dispatch(errorsNotification("Inncorrect username or password"));
 				dispatch(finishLoading());
 				return false;
 			});
@@ -96,18 +92,17 @@ export const getCurrentUser = () => {
 export const updateProfile = (user, callback) => {
 	return (dispatch) => {
 		axios
-			.put(`profile`, {
-				firstName: user.firstName,
-				lastName: user.lastName,
-				phone: user.phoneNumber,
+			.put(`users/me`, {
+				username: user.username,
+				password: user.password,
 			})
 			.then(({ data }) => {
-				dispatch(setUser(data.data));
-				dispatch(successNotification(data.message));
+				dispatch(getCurrentUser());
+				dispatch(successNotification("Password updated"));
 				callback && callback();
 			})
 			.catch((error) => {
-				dispatch(errorsNotification(error?.response?.data?.message));
+				dispatch(errorsNotification("Error updating password"));
 				callback && callback();
 			});
 	};

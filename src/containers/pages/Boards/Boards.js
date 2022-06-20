@@ -6,17 +6,31 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getCurrentUser } from 'store/actions/auth';
+import { deleteBoard } from 'store/actions/boards';
 
 const Boards = () => {
 	const [boardModalOpen, setBoardModalOpen] = useState(false);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector(state => state.auth.account);
+	const [initialValues, setInitialValues] = useState({
+		boardName: ""
+	});
+	const [isEdit, setIsEdit] = useState(false);
 
 	useEffect(() => {
 		dispatch(getCurrentUser());
 		// eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {
+		if (boardModalOpen === false) {
+			setIsEdit(false);
+			setInitialValues({
+				boardName: "",
+			})
+		}
+	}, [boardModalOpen])
 
 	return (
 		<>
@@ -55,13 +69,26 @@ const Boards = () => {
 									</div>
 									<p className="text-gray-500">{item?.tasks?.length} Tasks</p>
 								</div>
+								<div class="flex-shrink-0 pr-2">
+									<button onClick={e => {
+										e.stopPropagation();
+										setIsEdit(item.id);
+										setBoardModalOpen(true);
+										setInitialValues({ boardName: item.name });
+									}} type="button" class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+										<span class="sr-only">Open options</span>
+										<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+											<path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+										</svg>
+									</button>
+								</div>
 							</div>
 							{/* </Link> */}
 						</li>
 					))}
 				</ul>
 			</div>
-			<AddBoardModal businessModalOpen={boardModalOpen} setBusinessModalOpen={setBoardModalOpen} />
+			<AddBoardModal handleDelete={(id) => dispatch(deleteBoard(id))} initialValues={initialValues} edit={isEdit} setIsEdit={setIsEdit} businessModalOpen={boardModalOpen} setBusinessModalOpen={setBoardModalOpen} />
 		</>
 	);
 };

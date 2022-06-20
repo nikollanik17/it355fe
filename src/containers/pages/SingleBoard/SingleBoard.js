@@ -37,6 +37,10 @@ const SingleBoard = () => {
 		}
 	}, [taskModal])
 
+	const updateCallback = () => {
+		dispatch(getSingleBoard(boardId))
+	}
+
 	return (
 		<>
 			<div className='max-w-7xl px-5 mx-auto pt-10'>
@@ -121,7 +125,7 @@ const SingleBoard = () => {
 					</div>
 				</div>
 			</div>
-			<AddTaskModal handleDelete={(id) => dispatch(deleteTask(id))} boardId={boardId} editCallback={() => dispatch(getSingleBoard(boardId))} businessModalOpen={taskModal} setBusinessModalOpen={setTaskModal} initialValues={initialValues} edit={isEdit} setIsEdit={setIsEdit} />
+			<AddTaskModal handleDelete={(id) => dispatch(deleteTask(boardId, id, updateCallback))} boardId={boardId} editCallback={updateCallback} businessModalOpen={taskModal} setBusinessModalOpen={setTaskModal} initialValues={initialValues} edit={isEdit} setIsEdit={setIsEdit} />
 		</>
 	);
 };

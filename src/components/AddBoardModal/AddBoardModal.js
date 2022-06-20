@@ -4,28 +4,38 @@ import clsx from "clsx";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { createBoard } from "store/actions/boards";
+import { createBoard, updateBoard } from "store/actions/boards";
 
-const initialValues = {
-	boardName: "",
-};
 
 const registrationSchema = Yup.object().shape({
 	boardName: Yup.string().required("Board Name is required"),
 });
 
-const AddBoardModal = ({ businessModalOpen, setBusinessModalOpen }) => {
+const AddBoardModal = ({ businessModalOpen, setBusinessModalOpen, handleDelete, edit, setIsEdit, initialValues = {
+	boardName: ""
+} }) => {
 	const dispatch = useDispatch();
 
 	const formik = useFormik({
 		initialValues,
 		validationSchema: registrationSchema,
+		enableReinitialize: true,
 		onSubmit: (values) => {
-			dispatch(
-				createBoard(values.boardName, () => {
-					setBusinessModalOpen(false);
-				})
-			);
+			if (edit) {
+				dispatch(
+					updateBoard(edit, values.boardName, () => {
+						setBusinessModalOpen(false);
+						formik.resetForm();
+					})
+				);
+			} else {
+				dispatch(
+					createBoard(values.boardName, () => {
+						setBusinessModalOpen(false);
+						formik.resetForm();
+					})
+				);
+			}
 		},
 	});
 
@@ -34,7 +44,7 @@ const AddBoardModal = ({ businessModalOpen, setBusinessModalOpen }) => {
 			id="add-business-modal"
 			modalOpen={businessModalOpen}
 			setModalOpen={setBusinessModalOpen}
-			title="Add new board"
+			title={edit ? "Boad details" : "Add new board"}
 		>
 			<form noValidate onSubmit={formik.handleSubmit}>
 				<div>
@@ -43,7 +53,7 @@ const AddBoardModal = ({ businessModalOpen, setBusinessModalOpen }) => {
 						{/* Business Profile */}
 						<section>
 							<div className="text-sm mb-4">
-								Create board where you can easily add and maintain your tasks
+								{edit ? "Update your board" : "Create board where you can easily add and maintain your tasks"}
 							</div>
 							<div className="mb-3">
 								<div className="">
@@ -85,6 +95,12 @@ const AddBoardModal = ({ businessModalOpen, setBusinessModalOpen }) => {
 					{/* Modal footer */}
 					<div className="px-5 py-4">
 						<div className="flex flex-wrap justify-end space-x-2">
+							{edit && <div onClick={(e) => {
+								e.stopPropagation();
+								setBusinessModalOpen(false);
+								setIsEdit(false);
+								handleDelete(edit);
+							}} className="cursor-pointer btn bg-red-700 text-white">Delete</div>}
 							<div
 								className="btn-sm border-gray-200 hover:border-gray-300 text-gray-600 cursor-pointer"
 								onClick={(e) => {
@@ -99,7 +115,7 @@ const AddBoardModal = ({ businessModalOpen, setBusinessModalOpen }) => {
 								className="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white"
 								disabled={!formik.isValid}
 							>
-								Create board
+								Save
 							</button>
 						</div>
 					</div>

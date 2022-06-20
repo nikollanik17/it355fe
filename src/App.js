@@ -15,8 +15,6 @@ function App() {
 	const isAuthorized =
 		useSelector((state) => state.auth.account) || localStorage.getItem("user");
 
-	console.log('isAuthorized', isAuthorized);
-
 	return (
 		<>
 			{isLoading && <Loader />}

@@ -49,11 +49,11 @@ export const updateTask = (taskId, name, description, status, callback) => {
 	};
 }
 
-export const deleteTask = (taskId, callback) => {
+export const deleteTask = (boardId, taskId, callback) => {
 	return (dispatch) => {
 		dispatch(startLoading());
 		axios
-			.delete(`tasks/${taskId}`)
+			.delete(`tasks/${boardId}/${taskId}`)
 			.then((response) => {
 				dispatch(finishLoading());
 				dispatch(successNotification("Task deleted"));

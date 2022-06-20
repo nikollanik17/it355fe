@@ -71,3 +71,41 @@ export const createBoard = (name, callback) => {
 			});
 	};
 }
+
+export const updateBoard = (boardId, name, callback) => {
+	return (dispatch) => {
+		dispatch(startLoading());
+		axios
+			.put(`boards/${boardId}`, { name })
+			.then((response) => {
+				dispatch(getCurrentUser());
+				dispatch(successNotification("Successfully updated board"));
+				dispatch(finishLoading());
+				callback && callback();
+			})
+			.catch((error) => {
+				dispatch(finishLoading());
+				dispatch(errorsNotification("Error updating board"));
+				return false;
+			});
+	};
+}
+
+export const deleteBoard = (boardId, callback) => {
+	return (dispatch) => {
+		dispatch(startLoading());
+		axios
+			.delete(`boards/${boardId}`)
+			.then((response) => {
+				dispatch(getCurrentUser());
+				dispatch(successNotification("Successfully deleted board"));
+				dispatch(finishLoading());
+				callback && callback();
+			})
+			.catch((error) => {
+				dispatch(finishLoading());
+				dispatch(errorsNotification("Error deleting board"));
+				return false;
+			});
+	};
+}

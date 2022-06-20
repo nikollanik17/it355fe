@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 import Boards from 'containers/pages/Boards/Boards';
 import SingleBoard from 'containers/pages/SingleBoard/SingleBoard';
+import Account from "containers/pages/Account/Account";
 
 export function PrivateRoutes() {
 	return (
@@ -13,6 +14,7 @@ export function PrivateRoutes() {
 			<Switch>
 				<Route exact path="/boards" component={Boards} />
 				<Route exact path="/boards/:boardId" component={SingleBoard} />
+				<Route exact path="/account" component={Account} />
 
 				<Redirect from="/auth/login" to="/" />
 				<Redirect exact from="/" to="/boards" />
